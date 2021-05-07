@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/models.dart';
 import '../ui/auth/auth.dart';
 import '../ui/ui.dart';
@@ -16,7 +15,6 @@ class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
   Rxn<User> firebaseUser = Rxn<User>();
   Rxn<UserModel> firestoreUser = Rxn<UserModel>();
   final RxBool admin = false.obs;
@@ -42,8 +40,6 @@ class AuthController extends GetxController {
   handleAuthChanged(_firebaseUser) async {
     //get user data from firestore
     if (_firebaseUser?.uid != null) {
-      firestoreUser.bindStream(streamFirestoreUser());
-      await isAdmin();
     }
 
     if (_firebaseUser == null) {
@@ -60,21 +56,6 @@ class AuthController extends GetxController {
   // Firebase user a realtime stream
   Stream<User?> get user => _auth.authStateChanges();
 
-  //Streams the firestore user from the firestore collection
-  Stream<UserModel> streamFirestoreUser() {
-    print('streamFirestoreUser()');
-
-    return _db
-        .doc('/users/${firebaseUser.value!.uid}')
-        .snapshots()
-        .map((snapshot) => UserModel.fromMap(snapshot.data()!));
-  }
-
-  //get the firestore user from the firestore collection
-  Future<UserModel> getFirestoreUser() {
-    return _db.doc('/users/${firebaseUser.value!.uid}').get().then(
-        (documentSnapshot) => UserModel.fromMap(documentSnapshot.data()!));
-  }
 
   //Method to handle user sign in using email and password
   signInWithEmailAndPassword(BuildContext context) async {
@@ -120,8 +101,6 @@ class AuthController extends GetxController {
             email: result.user!.email!,
             name: nameController.text,
             photoUrl: gravatarUrl);
-        //create the user in firestore
-        _createUserFirestore(_newUser, result.user!);
         emailController.clear();
         passwordController.clear();
         hideLoadingIndicator();
@@ -144,9 +123,6 @@ class AuthController extends GetxController {
       await _auth
           .signInWithEmailAndPassword(email: oldEmail, password: password)
           .then((_firebaseUser) {
-        _firebaseUser.user!
-            .updateEmail(user.email)
-            .then((value) => _updateUserFirestore(user, _firebaseUser.user!));
       });
       hideLoadingIndicator();
       Get.snackbar('auth.updateUserSuccessNoticeTitle'.tr,
@@ -177,18 +153,6 @@ class AuthController extends GetxController {
     }
   }
 
-  //updates the firestore user in users collection
-  void _updateUserFirestore(UserModel user, User _firebaseUser) {
-    _db.doc('/users/${_firebaseUser.uid}').update(user.toJson());
-    update();
-  }
-
-  //create the firestore user in users collection
-  void _createUserFirestore(UserModel user, User _firebaseUser) {
-    _db.doc('/users/${_firebaseUser.uid}').set(user.toJson());
-    update();
-  }
-
   //password reset email
   Future<void> sendPasswordResetEmail(BuildContext context) async {
     showLoadingIndicator();
@@ -209,20 +173,6 @@ class AuthController extends GetxController {
           backgroundColor: Get.theme.snackBarTheme.backgroundColor,
           colorText: Get.theme.snackBarTheme.actionTextColor);
     }
-  }
-
-  //check if user is an admin user
-  isAdmin() async {
-    await getUser.then((user) async {
-      DocumentSnapshot adminRef =
-          await _db.collection('admin').doc(user.uid).get();
-      if (adminRef.exists) {
-        admin.value = true;
-      } else {
-        admin.value = false;
-      }
-      update();
-    });
   }
 
   // Sign out
