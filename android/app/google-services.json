@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "826815503930",
+    "project_id": "adlokal-2d120",
+    "storage_bucket": "adlokal-2d120.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826815503930:android:901bffdbb211d044261f03",
+        "android_client_info": {
+          "package_name": "com.tyrn.adlokal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826815503930-3uqrfp07qlkak9g5nmghv35mept39vtu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyrn.adlokal",
+            "certificate_hash": "f705f4676d68542fc4ce11bfd621320b9b103d18"
+          }
+        },
+        {
+          "client_id": "826815503930-3864k6pditg9vi4fjl90m3iekcrq2mso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqqU6E2UsSCxec0aWr7EGdRWs-xJyeP7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826815503930-3864k6pditg9vi4fjl90m3iekcrq2mso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
