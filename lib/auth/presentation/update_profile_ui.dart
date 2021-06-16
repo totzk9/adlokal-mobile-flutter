@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../models/models.dart';
-import '../../ui/components/components.dart';
-import '../../helpers/helpers.dart';
+
 import '../../controllers/controllers.dart';
+import '../../helpers/helpers.dart';
+import '../../models/models.dart';
 import '../../ui/auth/auth.dart';
+import '../../ui/components/components.dart';
 
 class UpdateProfileUI extends StatelessWidget {
   final AuthController authController = AuthController.to;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  @override
   Widget build(BuildContext context) {
     //print('user.name: ' + user?.value?.name);
-    authController.nameController.text =
-        authController.firestoreUser.value!.name;
-    authController.emailController.text =
-        authController.firestoreUser.value!.email;
+    // authController.nameController.text =
+    //     authController.firestoreUser.value!.name;
+    // authController.emailController.text =
+    //     authController.firestoreUser.value!.email;
     return Scaffold(
       appBar: AppBar(title: Text('auth.updateProfileTitle'.tr)),
       body: Form(
@@ -30,14 +32,14 @@ class UpdateProfileUI extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   LogoGraphicHeader(),
-                  SizedBox(height: 48.0),
+                  const SizedBox(height: 48.0),
                   FormInputFieldWithIcon(
                     controller: authController.nameController,
                     iconPrefix: Icons.person,
                     labelText: 'auth.nameFormField'.tr,
                     validator: Validator().name,
-                    onChanged: (value) => null,
-                    onSaved: (value) =>
+                    onChanged: (String value){},
+                    onSaved: (String? value) =>
                         authController.nameController.text = value!,
                   ),
                   FormVerticalSpace(),
@@ -47,8 +49,8 @@ class UpdateProfileUI extends StatelessWidget {
                     labelText: 'auth.emailFormField'.tr,
                     validator: Validator().email,
                     keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) => null,
-                    onSaved: (value) =>
+                    onChanged: (String value) {},
+                    onSaved: (String? value) =>
                         authController.emailController.text = value!,
                   ),
                   FormVerticalSpace(),
@@ -58,14 +60,14 @@ class UpdateProfileUI extends StatelessWidget {
                         if (_formKey.currentState!.validate()) {
                           SystemChannels.textInput
                               .invokeMethod('TextInput.hide');
-                          UserModel _updatedUser = UserModel(
-                              uid: authController.firestoreUser.value!.uid,
-                              name: authController.nameController.text,
-                              email: authController.emailController.text,
-                              photoUrl:
-                                  authController.firestoreUser.value!.photoUrl);
-                          _updateUserConfirm(context, _updatedUser,
-                              authController.firestoreUser.value!.email);
+                          // UserModel _updatedUser = UserModel(
+                          //     uid: authController.firestoreUser.value!.uid,
+                          //     name: authController.nameController.text,
+                          //     email: authController.emailController.text,
+                          //     photoUrl:
+                          //         authController.firestoreUser.value!.photoUrl);
+                          // _updateUserConfirm(context, _updatedUser,
+                          //     authController.firestoreUser.value!.email);
                         }
                       }),
                   FormVerticalSpace(),
@@ -85,10 +87,10 @@ class UpdateProfileUI extends StatelessWidget {
   Future<void> _updateUserConfirm(
       BuildContext context, UserModel updatedUser, String oldEmail) async {
     final AuthController authController = AuthController.to;
-    final TextEditingController _password = new TextEditingController();
+    final TextEditingController _password = TextEditingController();
     return Get.dialog(
       AlertDialog(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         title: Text(
           'auth.enterPassword'.tr,
@@ -97,28 +99,28 @@ class UpdateProfileUI extends StatelessWidget {
           controller: _password,
           iconPrefix: Icons.lock,
           labelText: 'auth.passwordFormField'.tr,
-          validator: (value) {
-            String pattern = r'^.{6,}$';
-            RegExp regex = RegExp(pattern);
+          validator: (String? value) {
+            const String pattern = r'^.{6,}$';
+            final RegExp regex = RegExp(pattern);
             if (!regex.hasMatch(value!))
               return 'validator.password'.tr;
             else
               return null;
           },
           obscureText: true,
-          onChanged: (value) => null,
-          onSaved: (value) => _password.text = value!,
+          onChanged: (String value) {},
+          onSaved: (String? value) => _password.text = value!,
           maxLines: 1,
         ),
         actions: <Widget>[
-          new TextButton(
-            child: new Text('auth.cancel'.tr.toUpperCase()),
+          TextButton(
+            child: Text('auth.cancel'.tr.toUpperCase()),
             onPressed: () {
               Get.back();
             },
           ),
-          new TextButton(
-            child: new Text('auth.submit'.tr.toUpperCase()),
+          TextButton(
+            child: Text('auth.submit'.tr.toUpperCase()),
             onPressed: () async {
               Get.back();
               await authController.updateUser(

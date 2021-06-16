@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'auth/auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'components/segmented_selector.dart';
-import '../controllers/controllers.dart';
-import 'components/components.dart';
-import '../models/models.dart';
+
 import '../constants/constants.dart';
+import '../controllers/controllers.dart';
+import '../models/models.dart';
+import 'components/components.dart';
+import 'components/segmented_selector.dart';
 
 class SettingsUI extends StatelessWidget {
   //final LanguageController languageController = LanguageController.to;
@@ -31,7 +31,7 @@ class SettingsUI extends StatelessWidget {
             title: Text('settings.updateProfile'.tr),
             trailing: ElevatedButton(
               onPressed: () async {
-                Get.to(UpdateProfileUI());
+                // Get.to(UpdateProfileUI());
               },
               child: Text(
                 'settings.updateProfile'.tr,
@@ -52,14 +52,14 @@ class SettingsUI extends StatelessWidget {
     );
   }
 
-  languageListTile(BuildContext context) {
+  GetBuilder<LanguageController> languageListTile(BuildContext context) {
     return GetBuilder<LanguageController>(
-      builder: (controller) => ListTile(
+      builder: (LanguageController controller) => ListTile(
         title: Text('settings.language'.tr),
         trailing: DropdownPicker(
           menuOptions: Globals.languageOptions,
           selectedOption: controller.currentLanguage,
-          onChanged: (value) async {
+          onChanged: (String? value) async {
             await controller.updateLanguage(value!);
             Get.forceAppUpdate();
           },
@@ -68,17 +68,17 @@ class SettingsUI extends StatelessWidget {
     );
   }
 
-  themeListTile(BuildContext context) {
+  GetBuilder<ThemeController> themeListTile(BuildContext context) {
     final List<MenuOptionsModel> themeOptions = [
       MenuOptionsModel(
-          key: "system", value: 'settings.system'.tr, icon: Icons.brightness_4),
+          key: 'system', value: 'settings.system'.tr, icon: Icons.brightness_4),
       MenuOptionsModel(
-          key: "light", value: 'settings.light'.tr, icon: Icons.brightness_low),
+          key: 'light', value: 'settings.light'.tr, icon: Icons.brightness_low),
       MenuOptionsModel(
-          key: "dark", value: 'settings.dark'.tr, icon: Icons.brightness_3)
+          key: 'dark', value: 'settings.dark'.tr, icon: Icons.brightness_3)
     ];
     return GetBuilder<ThemeController>(
-      builder: (controller) => ListTile(
+      builder: (ThemeController controller) => ListTile(
         title: Text('settings.theme'.tr),
         trailing: SegmentedSelector(
           selectedOption: controller.currentTheme,

@@ -7,8 +7,8 @@ import 'package:get_storage/get_storage.dart';
 
 class ThemeController extends GetxController {
   static ThemeController get to => Get.find();
-  final theme = "system".obs;
-  final store = GetStorage();
+  final RxString theme = 'system'.obs;
+  final GetStorage store = GetStorage();
   late ThemeMode _themeMode;
 
   ThemeMode get themeMode => _themeMode;
@@ -33,8 +33,8 @@ class ThemeController extends GetxController {
     return _setThemeMode;
   }
 
-  getThemeModeFromStore() async {
-    String _themeString = store.read('theme') ?? 'system';
+  Future<void> getThemeModeFromStore() async {
+    final String _themeString = store.read('theme') ?? 'system';
     setThemeMode(_themeString);
   }
 

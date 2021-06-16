@@ -1,16 +1,18 @@
+import 'package:adlokal/auth/presentation/reset_password_ui.dart';
+import 'package:adlokal/auth/presentation/sign_up_ui.dart';
+import 'package:adlokal/presentation/ui.dart';
 import 'package:get/get.dart';
-import '../ui/ui.dart';
-import '../ui/auth/auth.dart';
+
 
 class AppRoutes {
-  AppRoutes._(); //this is to prevent anyone from instantiating this object
-  static final routes = [
-    GetPage(name: '/', page: () => SplashUI()),
-    GetPage(name: '/signin', page: () => SignInUI()),
-    GetPage(name: '/signup', page: () => SignUpUI()),
-    GetPage(name: '/home', page: () => HomeUI()),
-    GetPage(name: '/settings', page: () => SettingsUI()),
-    GetPage(name: '/reset-password', page: () => ResetPasswordUI()),
-    GetPage(name: '/update-profile', page: () => UpdateProfileUI()),
+  AppRoutes._();
+  static final List<GetPage<dynamic>> routes = <GetPage<dynamic>>[
+    GetPage<dynamic>(name: '/', page: () => SplashUI()),
+    // GetPage<dynamic>(name: '/signin', page: () => SignInUI()),
+    GetPage<dynamic>(name: '/signup', page: () => SignUpUI()),
+    GetPage<dynamic>(name: '/home', page: () => HomeUI()),
+    GetPage<dynamic>(name: '/settings', page: () => SettingsUI()),
+    GetPage<dynamic>(name: '/reset-password', page: () => ResetPasswordUI()),
+    // GetPage(name: '/update-profile', page: () => UpdateProfileUI()),
   ];
 }

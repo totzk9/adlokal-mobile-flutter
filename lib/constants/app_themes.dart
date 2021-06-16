@@ -12,8 +12,8 @@ class AppThemes {
   static const Color nevada = Color.fromRGBO(105, 109, 119, 1);
   static const Color ebonyClay = Color.fromRGBO(40, 42, 58, 1);
 
-  static String font1 = "ProductSans";
-  static String font2 = "Roboto";
+  static String font1 = 'ProductSans';
+  static String font2 = 'Roboto';
   //constants color range for light theme
   //main color
   static const Color _lightPrimaryColor = dodgerBlue;
@@ -75,7 +75,7 @@ class AppThemes {
   static const Color _darkBorderErrorColor = brinkPink;
 
   //text theme for light theme
-  static final TextTheme _lightTextTheme = TextTheme(
+  static const TextTheme _lightTextTheme = TextTheme(
     headline1: TextStyle(fontSize: 20.0, color: _lightTextColor),
     bodyText1: TextStyle(fontSize: 16.0, color: _lightTextColor),
     bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
@@ -91,26 +91,26 @@ class AppThemes {
     brightness: Brightness.light,
     fontFamily: font1,
     scaffoldBackgroundColor: _lightBackgroundColor,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: _lightPrimaryColor,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       color: _lightBackgroundAppBarColor,
       iconTheme: IconThemeData(color: _lightTextColor),
       textTheme: _lightTextTheme,
     ),
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: _lightPrimaryColor,
       primaryVariant: _lightBackgroundColor,
       // secondary: _lightSecondaryColor,
     ),
-    snackBarTheme: SnackBarThemeData(
+    snackBarTheme: const SnackBarThemeData(
         backgroundColor: _lightBackgroundAlertColor,
         actionTextColor: _lightBackgroundActionTextColor),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: _lightIconColor,
     ),
-    popupMenuTheme: PopupMenuThemeData(color: _lightBackgroundAppBarColor),
+    popupMenuTheme: const PopupMenuThemeData(color: _lightBackgroundAppBarColor),
     textTheme: _lightTextTheme,
     buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
@@ -119,7 +119,7 @@ class AppThemes {
         buttonColor: _lightPrimaryColor,
         textTheme: ButtonTextTheme.primary),
     unselectedWidgetColor: _lightPrimaryColor,
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       //prefixStyle: TextStyle(color: _lightIconColor),
       border: OutlineInputBorder(
           borderSide: BorderSide(width: 1.0),
@@ -161,7 +161,7 @@ class AppThemes {
       color: _darkBackgroundAppBarColor,
       fontWeight: FontWeight.w100);*/
 
-  static final TextTheme _darkTextTheme = TextTheme(
+  static const TextTheme _darkTextTheme = TextTheme(
     headline1: TextStyle(fontSize: 20.0, color: _darkTextColor),
     bodyText1: TextStyle(fontSize: 16.0, color: _darkTextColor),
     bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
@@ -180,28 +180,28 @@ class AppThemes {
 
     fontFamily: font1,
     scaffoldBackgroundColor: _darkBackgroundColor,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: _darkPrimaryColor,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       color: _darkBackgroundAppBarColor,
       iconTheme: IconThemeData(color: _darkTextColor),
       textTheme: _darkTextTheme,
     ),
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       primary: _darkPrimaryColor,
       primaryVariant: _darkBackgroundColor,
 
       // secondary: _darkSecondaryColor,
     ),
-    snackBarTheme: SnackBarThemeData(
+    snackBarTheme: const SnackBarThemeData(
         contentTextStyle: TextStyle(color: Colors.white),
         backgroundColor: _darkBackgroundAlertColor,
         actionTextColor: _darkBackgroundActionTextColor),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: _darkIconColor, //_darkIconColor,
     ),
-    popupMenuTheme: PopupMenuThemeData(color: _darkBackgroundAppBarColor),
+    popupMenuTheme: const PopupMenuThemeData(color: _darkBackgroundAppBarColor),
     textTheme: _darkTextTheme,
     buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
@@ -210,7 +210,7 @@ class AppThemes {
         buttonColor: _darkPrimaryColor,
         textTheme: ButtonTextTheme.primary),
     unselectedWidgetColor: _darkPrimaryColor,
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       prefixStyle: TextStyle(color: _darkIconColor),
       //labelStyle: TextStyle(color: nevada),
       border: OutlineInputBorder(

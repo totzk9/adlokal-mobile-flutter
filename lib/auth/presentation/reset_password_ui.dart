@@ -1,15 +1,17 @@
+import 'package:adlokal/presentation/components/form_input_field_with_icon.dart';
+import 'package:adlokal/presentation/components/logo_graphic_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../ui/auth/auth.dart';
-import '../../ui/components/components.dart';
-import '../../helpers/helpers.dart';
+
 import '../../controllers/controllers.dart';
+import '../../helpers/helpers.dart';
 
 class ResetPasswordUI extends StatelessWidget {
   final AuthController authController = AuthController.to;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
@@ -24,15 +26,15 @@ class ResetPasswordUI extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   LogoGraphicHeader(),
-                  SizedBox(height: 48.0),
+                  const SizedBox(height: 48.0),
                   FormInputFieldWithIcon(
                     controller: authController.emailController,
                     iconPrefix: Icons.email,
                     labelText: 'auth.emailFormField'.tr,
                     validator: Validator().email,
                     keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) => null,
-                    onSaved: (value) =>
+                    onChanged: (String value) {},
+                    onSaved: (String? value) =>
                         authController.emailController.text = value as String,
                   ),
                   FormVerticalSpace(),
@@ -54,14 +56,14 @@ class ResetPasswordUI extends StatelessWidget {
     );
   }
 
-  appBar(BuildContext context) {
+  AppBar? appBar(BuildContext context) {
     if (authController.emailController.text == '') {
       return null;
     }
     return AppBar(title: Text('auth.resetPasswordTitle'.tr));
   }
 
-  signInLink(BuildContext context) {
+  StatelessWidget signInLink(BuildContext context) {
     if (authController.emailController.text == '') {
       return LabelButton(
         labelText: 'auth.signInonResetPasswordLabelButton'.tr,

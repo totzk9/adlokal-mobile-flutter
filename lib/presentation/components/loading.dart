@@ -16,11 +16,10 @@ bool isDarkTheme = false;
 bool _loaderShown = false;
 
 class Loading extends StatelessWidget {
-  final Widget? child;
-  final bool darkTheme;
-
   const Loading({Key? key, this.child, this.darkTheme = false})
       : super(key: key);
+  final Widget? child;
+  final bool darkTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +32,17 @@ class Loading extends StatelessWidget {
 }
 
 OverlayState? get _overlayState {
-  final context = _tKey.currentContext;
-  if (context == null) return null;
+  final BuildContext? context = _tKey.currentContext;
+  if (context == null) {
+    return null;
+  }
 
   NavigatorState? navigator;
 
   void visitor(Element element) {
-    if (navigator != null) return;
+    if (navigator != null) {
+      return;
+    }
 
     if (element.widget is Navigator) {
       navigator = (element as StatefulElement).state as NavigatorState;
@@ -60,7 +63,7 @@ Future<void> showLoadingIndicator(
     {bool isModal = true, Color? modalColor}) async {
   try {
     debugPrint('Showing loading overlay');
-    final _child = Center(
+    const Center _child = Center(
       child: SizedBox(
         child: CircularProgressIndicator(),
         /*(Platform.isAndroid
@@ -84,7 +87,7 @@ Future<void> showLoadingIndicator(
     );
   } catch (err) {
     debugPrint('Exception showing loading overlay\n${err.toString()}');
-    throw err;
+    rethrow;
   }
 }
 
@@ -94,7 +97,7 @@ Future<void> hideLoadingIndicator() async {
     await _hideOverlay();
   } catch (err) {
     debugPrint('Exception hiding loading overlay');
-    throw err;
+    rethrow;
   }
 }
 
@@ -102,15 +105,15 @@ Future<void> hideLoadingIndicator() async {
 /// These methods deal with showing and hiding the overlay
 Future<void> _showOverlay({required Widget child}) async {
   try {
-    final overlay = _overlayState;
+    final OverlayState? overlay = _overlayState;
 
     if (_loaderShown) {
       debugPrint('An overlay is already showing');
       return Future.value(false);
     }
 
-    final overlayEntry = OverlayEntry(
-      builder: (context) => child,
+    final OverlayEntry overlayEntry = OverlayEntry(
+      builder: (BuildContext context) => child,
     );
 
     overlay?.insert(overlayEntry);
@@ -118,7 +121,7 @@ Future<void> _showOverlay({required Widget child}) async {
     _loaderShown = true;
   } catch (err) {
     debugPrint('Exception inserting loading overlay\n${err.toString()}');
-    throw err;
+    rethrow;
   }
 }
 
@@ -128,6 +131,6 @@ Future<void> _hideOverlay() async {
     _loaderShown = false;
   } catch (err) {
     debugPrint('Exception removing loading overlay\n${err.toString()}');
-    throw err;
+    rethrow;
   }
 }

@@ -1,24 +1,26 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
-import '../constants/globals.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'dart:ui' as ui;
+
+import '../constants/globals.dart';
 
 class LanguageController extends GetxController {
   static LanguageController get to => Get.find();
-  final language = "".obs;
-  final store = GetStorage();
+  final RxString language = ''.obs;
+  final GetStorage store = GetStorage();
 
   String get currentLanguage => language.value;
 
   @override
-  void onReady() async {
+  Future<void> onReady() async {
     //setInitialLocalLanguage();
     super.onInit();
   }
 
   // Retrieves and Sets language based on device settings
-  setInitialLocalLanguage() {
+  void setInitialLocalLanguage() {
     if (currentLanguageStore.value == '') {
       String _deviceLanguage = ui.window.locale.toString();
       _deviceLanguage =

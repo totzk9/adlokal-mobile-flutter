@@ -5,8 +5,8 @@ class Validator {
   Validator();
 
   String? email(String? value) {
-    String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-    RegExp regex = RegExp(pattern);
+    const String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+    final RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!))
       return 'validator.email'.tr;
     else
@@ -14,8 +14,8 @@ class Validator {
   }
 
   String? password(String? value) {
-    String pattern = r'^.{6,}$';
-    RegExp regex = RegExp(pattern);
+    const String pattern = r'^.{6,}$';
+    final RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!))
       return 'validator.password'.tr;
     else
@@ -23,8 +23,8 @@ class Validator {
   }
 
   String? name(String? value) {
-    String pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-    RegExp regex = RegExp(pattern);
+    const String pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
+    final RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!))
       return 'validator.name'.tr;
     else
@@ -32,8 +32,8 @@ class Validator {
   }
 
   String? number(String? value) {
-    String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
-    RegExp regex = RegExp(pattern);
+    const String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
+    final RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!))
       return 'validator.number'.tr;
     else
@@ -41,8 +41,8 @@ class Validator {
   }
 
   String? amount(String? value) {
-    String pattern = r'^\d+$';
-    RegExp regex = RegExp(pattern);
+    const String pattern = r'^\d+$';
+    final RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!))
       return 'validator.amount'.tr;
     else
@@ -50,8 +50,8 @@ class Validator {
   }
 
   String? notEmpty(String? value) {
-    String pattern = r'^\S+$';
-    RegExp regex = RegExp(pattern);
+    const String pattern = r'^\S+$';
+    final RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!))
       return 'validator.notEmpty'.tr;
     else

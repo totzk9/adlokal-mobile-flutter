@@ -23,13 +23,13 @@ enum GravatarRating {
 }
 
 class Gravatar {
+  Gravatar(this.email) : hash = _generateHash(email);
+
   final String email;
   final String hash;
 
-  Gravatar(this.email) : this.hash = _generateHash(email);
-
   static String _generateHash(String email) {
-    String preparedEmail = email.trim().toLowerCase();
+    final String preparedEmail = email.trim().toLowerCase();
     return md5.convert(utf8.encode(preparedEmail)).toString();
   }
 
@@ -41,13 +41,18 @@ class Gravatar {
     GravatarRating? rating,
   }) {
     String hashDigest = hash;
-    Map<String, String> query = {};
+    final Map<String, String> query = <String, String>{};
 
-    if (size != null) query['s'] = size.toString();
-    if (defaultImage != null) query['d'] = _imageString(defaultImage);
-    if (forceDefault) query['f'] = 'y';
-    if (rating != null) query['r'] = _ratingString(rating);
-    if (fileExtension) hashDigest += '.png';
+    if (size != null)
+      query['s'] = size.toString();
+    if (defaultImage != null)
+      query['d'] = _imageString(defaultImage);
+    if (forceDefault)
+      query['f'] = 'y';
+    if (rating != null)
+      query['r'] = _ratingString(rating);
+    if (fileExtension)
+      hashDigest += '.png';
     //if (query.isEmpty) query = null;
 
     return Uri.https('www.gravatar.com', '/avatar/$hashDigest', query)
@@ -62,6 +67,7 @@ class Gravatar {
     return Uri.https('www.gravatar.com', '/$hash.qr').toString();
   }
 
+  @override
   String toString() {
     return imageUrl();
   }

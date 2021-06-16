@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-//import 'package:firebase_analytics/firebase_analytics.dart';
-//import 'package:firebase_analytics/observer.dart';
-import './controllers/controllers.dart';
-import './constants/constants.dart';
-import './ui/components/components.dart';
-import './helpers/helpers.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-void main() async {
+import './constants/constants.dart';
+//import 'package:firebase_analytics/firebase_analytics.dart';
+//import 'package:firebase_analytics/observer.dart';
+import './controllers/controllers.dart';
+import './helpers/helpers.dart';
+import 'presentation/components/loading.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
@@ -25,11 +25,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeController.to.getThemeModeFromStore();
     return GetBuilder<LanguageController>(
-      builder: (languageController) => Loading(
+      builder: (LanguageController languageController) => Loading(
         child: GetMaterialApp(
           translations: Localization(),
           locale: languageController.getLocale,
-          // <- Current locale
           navigatorObservers: [
             // FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
           ],
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.lightTheme,
           darkTheme: AppThemes.darkTheme,
           themeMode: ThemeMode.system,
-          initialRoute: "/",
+          initialRoute: '/',
           getPages: AppRoutes.routes,
         ),
       ),

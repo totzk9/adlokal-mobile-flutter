@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 
 class Localization extends Translations {
   @override
-  Map<String, Map<String, String>> get keys => {
-        'en': {
+  Map<String, Map<String, String>> get keys => <String, Map<String, String>>{
+        'en': <String, String>{
           'auth.signInButton': 'Sign In',
           'auth.signUpButton': 'Sign Up',
           'auth.resetPasswordButton': 'Send Password Reset',
@@ -60,7 +60,7 @@ class Localization extends Translations {
           'validator.amount':
               'Please enter a number i.e. 250 - no dollar symbol and no cents',
         },
-        'fr': {
+        'fr': <String, String>{
           'auth.signInButton': 'S\'identifier',
           'auth.signUpButton': 'S\'inscrire',
           'auth.resetPasswordButton': 'Envoyer Password Reset',
@@ -123,7 +123,7 @@ class Localization extends Translations {
           'validator.amount':
               'S\'il vous plaît entrer un numéro à savoir 250 - aucun symbole du dollar et pas cents',
         },
-        'es': {
+        'es': <String, String>{
           'auth.signInButton': 'Iniciar sesión',
           'auth.signUpButton': 'Inscribirse',
           'auth.resetPasswordButton': 'Enviar restablecimiento de contraseña',
@@ -185,7 +185,7 @@ class Localization extends Translations {
           'validator.amount':
               'Por favor, introduzca un número, es decir 250 - ningún símbolo del dólar y sin centavos',
         },
-        'de': {
+        'de': <String, String>{
           'auth.signInButton': 'Einloggen',
           'auth.signUpButton': 'Anmeldung',
           'auth.resetPasswordButton': 'Senden Passwort zurücksetzen',
@@ -245,7 +245,7 @@ class Localization extends Translations {
           'validator.amount':
               'Bitte geben Sie eine Zahl das heißt 250 - kein Dollar-Symbol und keinen Cent',
         },
-        'hi': {
+        'hi': <String, String>{
           'auth.signInButton': 'दाखिल करना',
           'auth.signUpButton': 'साइन अप करें',
           'auth.resetPasswordButton': 'भेजें पासवर्ड रीसेट',
@@ -301,7 +301,7 @@ class Localization extends Translations {
           'validator.amount':
               'कोई डॉलर प्रतीक और कोई सेंट - एक नंबर अर्थात 250 दर्ज करें',
         },
-        'pt': {
+        'pt': <String, String>{
           'auth.signInButton': 'Entrar',
           'auth.signUpButton': 'Inscrever-se',
           'auth.resetPasswordButton': 'Enviar Password Reset',
@@ -358,7 +358,7 @@ class Localization extends Translations {
           'validator.amount':
               'Por favor insira um número ou seja 250 - nenhum símbolo dólar e há centavos',
         },
-        'zh': {
+        'zh': <String, String>{
           'auth.signInButton': '登入',
           'auth.signUpButton': '报名',
           'auth.resetPasswordButton': '发送密码重置',
@@ -410,7 +410,7 @@ class Localization extends Translations {
           'validator.notEmpty': '这是一个必填字段。',
           'validator.amount': '请输入一个数，即250  - 没有美元符号和无分',
         },
-        'ja': {
+        'ja': <String, String>{
           'auth.signInButton': 'サインイン',
           'auth.signUpButton': 'サインアップ',
           'auth.resetPasswordButton': '送信パスワードリセット',
@@ -463,7 +463,7 @@ class Localization extends Translations {
           'validator.notEmpty': 'これは必要項目です。',
           'validator.amount': 'ノードル記号なしセント - すなわち、250番号を入力してください。',
         },
-        'ru': {
+        'ru': <String, String>{
           'auth.signInButton': 'Войти',
           'auth.signUpButton': 'Зарегистрироваться',
           'auth.resetPasswordButton': 'Отправить Сброс пароля',
